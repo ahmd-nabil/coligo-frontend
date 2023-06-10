@@ -5,10 +5,18 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true}"
       >Coligo</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <button
+      (click)="toggleNavbarCollapsing()"
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbaritems"
+      aria-controls="navbaritems"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    ><span class="navbar-toggler-icon"></span></button>
+    
+      <div [class.collapse]="navbarCollapsed" class="collapse navbar-collapse" id="navbaritems">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" 
@@ -18,7 +26,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" 
-            routerLink="/quiz"
+            routerLink="/addQuiz"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact:true}"
             >Quiz</a>

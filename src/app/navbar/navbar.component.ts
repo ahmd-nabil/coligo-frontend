@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  name = 'Angular ' + VERSION.major;
+  navbarCollapsed = true;
 
+  toggleNavbarCollapsing() {
+    this.navbarCollapsed = !this.navbarCollapsed;
+  }
 }
