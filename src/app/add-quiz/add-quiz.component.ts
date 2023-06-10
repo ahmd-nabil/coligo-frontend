@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Quiz } from '../model/quiz';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { QuizService } from '../services/quiz.service';
 
 @Component({
   selector: 'app-add-quiz',
@@ -9,9 +10,9 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class AddQuizComponent {
   quizForm !: FormGroup;
-  quiz = new Quiz();
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder,
+              private quizService: QuizService){
     this.quizForm = this.fb.group({
       courseName: '',
       topic: '',
@@ -21,7 +22,8 @@ export class AddQuizComponent {
   }
 
   addNewQuiz() {
-    console.log(this.quizForm);
+    let response = this.quizService.saveQuiz(this.quizForm);
+    console.log(response);
   }
 
   get questions() {

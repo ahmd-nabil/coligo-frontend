@@ -2,6 +2,7 @@
     [formGroup]="quizForm"
     (ngSubmit)="addNewQuiz()"
     >
+    {{(quizForm.value | json)}}
     <div class="form-group">
         <label for="courseName">Course name</label>
         <input type="text" class="form-control" id="courseName" formControlName="courseName">
@@ -48,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <button (click)="addAnswer(q)" class="btn btn-primary">add answer</button>
+                    <button (click)="addAnswer(q)" type="button" class="btn btn-primary">add answer</button>
                 </div>
             </div>
         </div>
