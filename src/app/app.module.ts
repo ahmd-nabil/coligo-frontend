@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AddQuizComponent } from './add-quiz/add-quiz.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,15 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HomeComponent,
     QuizComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    AddQuizComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

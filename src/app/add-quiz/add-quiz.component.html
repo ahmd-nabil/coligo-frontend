@@ -1,0 +1,59 @@
+<form 
+    [formGroup]="quizForm"
+    (ngSubmit)="addNewQuiz()"
+    >
+    <div class="form-group">
+        <label for="courseName">Course name</label>
+        <input type="text" class="form-control" id="courseName" formControlName="courseName">
+        <!-- <div [hidden]="courseName.valid || courseName.pristine"
+             class="alert alert-danger">
+             Course Name is required
+        </div> -->
+    </div>
+
+    <div class="form-group">
+        <label for="topic">Topic</label>
+        <input type="text" class="form-control" id="topic" formControlName="topic">
+        <!-- <div [hidden]="topic.valid || topic.pristine"
+             class="alert alert-danger">
+             topic is required
+        </div> -->
+    </div>
+    
+    <div class="form-group">
+        <label for="dueTo">due to</label>
+        <input type="datetime-local" class="form-control" id="dueTo" formControlName="dueTo">
+        <!-- <div [hidden]="dueTo.valid || dueTo.pristine"
+             class="alert alert-danger">
+             due is required
+        </div> -->
+    </div>
+    
+    <div formArrayName="questions">
+        <div *ngFor="let question of questions.controls; let q = index" [formGroupName]="q">
+            <div class="card">
+                <div class="card-header">
+                    <label for="question-{{q}}">Question: </label>
+                    <input class="form-control" id="question-{{q}}" formControlName="question" type="text">
+                </div>
+                <div class="card-body">
+                    <div formArrayName="answers">
+                        <div *ngFor="let answer of getAnswers(q).controls; let a = index" [formGroupName]="a">
+                            <div class="form-check form-switch">
+                                <div class="row">
+                                <input class="form-check-input" type="checkbox" id="correct" formControlName="correct">
+                                <div class="col-lg-11"><input type="text" class="form-control" formControlName="answer"></div>
+                                <div class="col-lg-1"><span type="button" class="badge rounded-pill bg-danger" (click)="removeAnswer(q,a)">remove</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="addAnswer(q)" class="btn btn-primary">add answer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="button" (click)="addQuestion()">Add Question</button>
+    <button class="btn btn-primary" type="submit"> create quiz</button>
+ </form>
