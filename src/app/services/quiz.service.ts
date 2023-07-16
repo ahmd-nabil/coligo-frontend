@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { Observable } from "rxjs";
+import { Quiz } from "../model/quiz";
 
 @Injectable({
     providedIn: "root"
@@ -10,10 +12,7 @@ export class QuizService {
 
     constructor(private http : HttpClient) {}
 
-    saveQuiz(form: FormGroup) {
-        if(form.valid) {
-            let quiz = form.value;
-            this.http.post(this.QUIZ_API, quiz).subscribe(response => response);
-        }
+    saveQuiz(quiz: Quiz): Observable<any> {
+        return this.http.post(this.QUIZ_API, quiz);
     }
 }

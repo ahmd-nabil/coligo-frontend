@@ -22,8 +22,12 @@ export class AddQuizComponent {
   }
 
   addNewQuiz() {
-    let response = this.quizService.saveQuiz(this.quizForm);
-    console.log(response);
+    if(this.quizForm.valid) {
+      let quiz = this.quizForm.value;
+      let response;
+      this.quizService.saveQuiz(quiz).subscribe(res => response = res);
+      console.log(response);
+    }
   }
 
   get questions() {
@@ -55,5 +59,4 @@ export class AddQuizComponent {
   removeAnswer(q: number, a: number) {
 
   }
-
 }
