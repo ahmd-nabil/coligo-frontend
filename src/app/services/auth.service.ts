@@ -26,6 +26,10 @@ export class AuthService {
     );
   }
 
+  logout() {
+    this.removeToken();
+  }
+
   getToken(): string | null {
     this.authToken = localStorage.getItem('Authorization');
     return this.authToken ;
@@ -39,5 +43,9 @@ export class AuthService {
   removeToken(): void {
     this.authToken = null;
     localStorage.removeItem('Authorization');
+  }
+
+  isAuthenticated() {
+    return this.getToken() != null;  // todo create isValid() to validate the token
   }
 }
