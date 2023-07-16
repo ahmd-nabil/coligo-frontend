@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Quiz } from '../model/quiz';
+import { Quiz } from '../../model/quiz';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { QuizService } from '../services/quiz.service';
+import { QuizService } from '../../services/quiz.service';
 
 @Component({
   selector: 'app-add-quiz',
