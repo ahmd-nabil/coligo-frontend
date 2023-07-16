@@ -11,6 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthButtonComponent } from './components/navbar/auth-button/auth-button.component';
+import { SignupButtonComponent } from './components/navbar/signup-button/signup-button.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     QuizComponent,
     NavbarComponent,
     SidebarComponent,
-    AddQuizComponent
+    AddQuizComponent,
+    AuthButtonComponent,
+    SignupButtonComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
