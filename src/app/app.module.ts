@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthButtonComponent } from './components/navbar/auth-button/auth-button.component';
 import { SignupButtonComponent } from './components/navbar/signup-button/signup-button.component';
 import { LoginComponent } from './components/login/login.component';
+import { SignupFormComponent } from './components/signup-form/signup-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoginComponent } from './components/login/login.component';
     AddQuizComponent,
     AuthButtonComponent,
     SignupButtonComponent,
-    LoginComponent
+    LoginComponent,
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,
