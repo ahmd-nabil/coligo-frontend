@@ -8,7 +8,6 @@ import { AuthResponse } from '../model/auth-response.mode';
 })
 export class AuthService {
   
-  authToken : string | null = null;
   constructor(private http: HttpClient) { 
     this.getToken();
   }
@@ -31,18 +30,15 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    this.authToken = localStorage.getItem('Authorization');
-    return this.authToken ;
+    return localStorage.getItem('jwt');
   }
 
   setToken(token: string): void {
-    this.authToken = token;
-    localStorage.setItem('Authorization', token);
+    localStorage.setItem('jwt', token);
   }
 
   removeToken(): void {
-    this.authToken = null;
-    localStorage.removeItem('Authorization');
+    localStorage.removeItem('jwt');
   }
 
   isAuthenticated() {
