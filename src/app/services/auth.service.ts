@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, partition, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, audit, partition, tap } from 'rxjs';
 import { AuthResponse } from '../model/auth-response.model';
+import { SignupRequest } from '../model/signup-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,19 @@ export class AuthService {
         }
       )
     );
+  }
+
+  signup(signupRequest: SignupRequest): Observable<AuthResponse> {
+    return this.http
+    .post<AuthResponse>('http://localhost:8080/api/v1/auth/register', signupRequest)
+    .pipe(
+      tap(
+        {
+          next: AuthResponse => this.setToken(AuthResponse.token),
+          error: () => this.removeToken()
+        }
+      )
+    )
   }
 
   logout() {
