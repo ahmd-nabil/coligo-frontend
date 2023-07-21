@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, partition, tap } from 'rxjs';
-import { AuthResponse } from '../model/auth-response.mode';
+import { AuthResponse } from '../model/auth-response.model';
 
 @Injectable({
   providedIn: 'root'
