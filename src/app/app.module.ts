@@ -13,7 +13,7 @@ import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthButtonComponent } from './components/navbar/auth-button/auth-button.component';
 import { SignupButtonComponent } from './components/navbar/signup-button/signup-button.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { JwtInterceptor } from './services/jwt.interceptor';
 
@@ -27,7 +27,7 @@ import { JwtInterceptor } from './services/jwt.interceptor';
     AddQuizComponent,
     AuthButtonComponent,
     SignupButtonComponent,
-    LoginComponent,
+    LoginFormComponent,
     SignupFormComponent
   ],
   imports: [
