@@ -1,10 +1,10 @@
 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-    <li class="nav-item" *ngIf="!authenticated">
+    <li class="nav-item" *ngIf="user == null">
       <a class="nav-link" routerLink="/login"><i class="fas fa-user me-1"></i>Login</a>
     </li>
 
 
-  <li class="nav-item dropdown" *ngIf="authenticated">
+  <li class="nav-item dropdown" *ngIf="user != null">
     <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fas fa-user"></i> {{ user ? user.name : 'User' }}
     </a>

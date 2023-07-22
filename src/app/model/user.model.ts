@@ -2,7 +2,7 @@ export interface User{
     sub: string;
     role: string;
     iss: string;
-    iat: Date;
-    exp: Date;
+    iat: number;
+    exp: number;
     name: string;
 }

@@ -9,15 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth-button.component.css']
 })
 export class AuthButtonComponent implements OnInit {
-  authenticated: boolean = false;
-  user : User | undefined;
+  user : User | null = null;
 
-  constructor(private authService: AuthService) {}
-  
-  ngOnInit() {
-    this.authenticated = this.authService.isAuthenticated();
-      this.user = this.authService.getClaims();
+  constructor(private authService: AuthService) {
+    this.user = authService.user;
   }
+  
+  ngOnInit() {}
 
   logout() {
     this.authService.logout();

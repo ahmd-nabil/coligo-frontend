@@ -11,8 +11,11 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  
-  constructor(private http: HttpClient, private router: Router) { 
+  userSubject: BehaviorSubject<User | null> = new BehaviorSubject(this.getAuthenticatedUser());
+  user: User | null = null;
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.userSubject.subscribe(user => this.user = user);
   }
 
   login(email: string, password: string){
@@ -21,8 +24,10 @@ export class AuthService {
     .pipe(
       tap(
         {
-          next: authResponse => this.setToken(authResponse.token),
-          error: () => this.removeToken()
+          next: authResponse => {
+            this.addTokenToLocalStorage(authResponse.token);
+            this.userSubject.next(this.getAuthenticatedUser());
+          }
         }
       )
     );
@@ -34,38 +39,46 @@ export class AuthService {
     .pipe(
       tap(
         {
-          next: AuthResponse => this.setToken(AuthResponse.token),
-          error: () => this.removeToken()
+          next: authResponse => {
+            this.addTokenToLocalStorage(authResponse.token);
+            this.userSubject.next(this.getAuthenticatedUser());
+          }
         }
       )
     )
   }
 
   logout() {
-    this.removeToken();
+    this.unAuthenticate();
     this.router.navigate(['/login']);
   }
 
-  getToken(): string | null {
+  getStoredToken(): string | null {
     return localStorage.getItem('jwt');
   }
 
-  setToken(token: string): void {
+  addTokenToLocalStorage(token: string): void {
     localStorage.setItem('jwt', token);
   }
 
-  removeToken(): void {
+  unAuthenticate(): void {
     localStorage.removeItem('jwt');
+    this.userSubject.next(null);
   }
 
-  isAuthenticated() {
-    return this.getToken() != null;  // todo create isValid() to validate the token
-  }
-
-  getClaims() : User | undefined {
-    if(this.getToken() != null) {
-      return jwtDecode(this.getToken()!);
+  getAuthenticatedUser() : User | null{
+    const storedToken = this.getStoredToken();
+    if(storedToken == null) {
+      return null;
     }
-    return undefined;
+    const user: User = jwtDecode(storedToken);
+    if((user.exp * 1000) < Date.now()) { // get exp in milliSecond first
+      return null;
+    }
+    return user;
+  }
+
+  isAuthenticated() : boolean {
+    return this.user != null;
   }
 }

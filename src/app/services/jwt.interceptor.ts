@@ -7,18 +7,20 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { User } from '../model/user.model';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-
-  constructor(private authService: AuthService) {}
+  user : User | null;
+  constructor(private authService: AuthService) {
+    this.user = this.authService.user;
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     console.log("interceptor is here");
-    if(this.authService.isAuthenticated()) {
-      console.log("authenticated User");
+    if(this.user != null) {
       request = request.clone({
-        headers: request.headers.set('Authorization', `Bearer ${this.authService.getToken()}`)
+        headers: request.headers.set('Authorization', `Bearer ${this.authService.getStoredToken()}`)
       });
     }
     return next.handle(request);
