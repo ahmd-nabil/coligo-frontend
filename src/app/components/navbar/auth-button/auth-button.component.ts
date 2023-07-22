@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/model/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,16 +10,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuthButtonComponent implements OnInit {
   authenticated: boolean = false;
-  userClaims: undefined | {name:string};
+  user : User | undefined;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
   
   ngOnInit() {
     this.authenticated = this.authService.isAuthenticated();
+      this.user = this.authService.getClaims();
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);  // TODO add authGuard to do that everywhere
   }
 }

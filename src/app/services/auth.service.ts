@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, audit, partition, tap } from 'rxjs';
 import { AuthResponse } from '../model/auth-response.model';
 import { SignupRequest } from '../model/signup-request.model';
+import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
-  constructor(private http: HttpClient) { 
-    this.getToken();
+  constructor(private http: HttpClient, private router: Router) { 
   }
 
   login(email: string, password: string){
@@ -41,6 +43,7 @@ export class AuthService {
 
   logout() {
     this.removeToken();
+    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
@@ -57,5 +60,12 @@ export class AuthService {
 
   isAuthenticated() {
     return this.getToken() != null;  // todo create isValid() to validate the token
+  }
+
+  getClaims() : User | undefined {
+    if(this.getToken() != null) {
+      return jwtDecode(this.getToken()!);
+    }
+    return undefined;
   }
 }
