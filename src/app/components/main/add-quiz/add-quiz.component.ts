@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Quiz } from '../../../model/quiz';
+import { Quiz } from '../../../model/quiz.model';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { QuizService } from '../../../services/quiz.service';
 
