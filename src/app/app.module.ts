@@ -5,17 +5,18 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './components/home/home.component';
-import { QuizComponent } from './components/quiz/quiz.component';
+import { HomeComponent } from './components/main/home/home.component';
+import { QuizComponent } from './components/main/quiz/quiz.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
+import { SidebarComponent } from './components/main/sidebar/sidebar.component';
+import { AddQuizComponent } from './components/main/add-quiz/add-quiz.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthButtonComponent } from './components/navbar/auth-button/auth-button.component';
 import { SignupButtonComponent } from './components/navbar/signup-button/signup-button.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { JwtInterceptor } from './services/jwt.interceptor';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { JwtInterceptor } from './services/jwt.interceptor';
     AuthButtonComponent,
     SignupButtonComponent,
     LoginFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
