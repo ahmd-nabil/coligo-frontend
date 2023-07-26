@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, audit, partition, tap } from 'rxjs';
 import { AuthResponse } from '../model/auth-response.model';
 import { SignupRequest } from '../model/signup-request.model';
@@ -12,10 +12,13 @@ import { User } from '../model/user.model';
 })
 export class AuthService {
   userSubject: BehaviorSubject<User | null> = new BehaviorSubject(this.getAuthenticatedUser());
-  user: User | null = null;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.userSubject.subscribe(user => this.user = user);
+    window.onstorage = () => {
+      const user = this.getAuthenticatedUser();
+      this.userSubject.next(user);
+      user == null ? this.router.navigateByUrl("/login") : this.router.navigateByUrl("/");
+    }
   }
 
   login(email: string, password: string){
@@ -49,7 +52,8 @@ export class AuthService {
   }
 
   logout() {
-    this.unAuthenticate();
+    localStorage.removeItem('jwt');
+    this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
 
@@ -59,11 +63,6 @@ export class AuthService {
 
   addTokenToLocalStorage(token: string): void {
     localStorage.setItem('jwt', token);
-  }
-
-  unAuthenticate(): void {
-    localStorage.removeItem('jwt');
-    this.userSubject.next(null);
   }
 
   getAuthenticatedUser() : User | null{
@@ -76,9 +75,5 @@ export class AuthService {
       return null;
     }
     return user;
-  }
-
-  isAuthenticated() : boolean {
-    return this.user != null;
   }
 }
