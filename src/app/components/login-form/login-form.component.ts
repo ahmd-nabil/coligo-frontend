@@ -14,7 +14,7 @@ export class LoginFormComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if(this.authService.isAuthenticated()) this.router.navigate(['/']);
+    if(this.authService.userSubject.getValue() != null) this.router.navigateByUrl('/');
   }
 
   login(loginForm: NgForm) {
@@ -22,7 +22,7 @@ export class LoginFormComponent implements OnInit{
     let password = loginForm.form.value.password;
     this.authService.login(email, password).subscribe
     ({
-      next: () => this.router.navigate(['/']),
+      next: () => this.router.navigateByUrl('/'),
       error: error => {
         this.error = error.error; console.log(error);}
     });

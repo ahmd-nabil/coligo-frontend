@@ -12,7 +12,7 @@ export class AuthButtonComponent implements OnInit {
   user : User | null = null;
 
   constructor(private authService: AuthService) {
-    this.user = authService.user;
+    authService.userSubject.subscribe(user => this.user = user);
   }
   
   ngOnInit() {}

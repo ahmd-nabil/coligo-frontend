@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignupRequest } from 'src/app/model/signup-request.model';
@@ -9,11 +9,15 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css']
 })
-export class SignupFormComponent {
+export class SignupFormComponent implements OnInit {
   error = null;
-
+  authenticated = false;
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    if(this.authService.userSubject.getValue() != null) this.router.navigateByUrl('/');
+  }
+  
   signup(signUpForm : NgForm) {
     const signupRequest = new SignupRequest(
       signUpForm.form.value.first_name,
