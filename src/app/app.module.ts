@@ -17,6 +17,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { JwtInterceptor } from './services/jwt.interceptor';
 import { MainComponent } from './components/main/main.component';
+import { AnnouncementsComponent } from './components/announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MainComponent } from './components/main/main.component';
     SignupButtonComponent,
     LoginFormComponent,
     SignupFormComponent,
-    MainComponent
+    MainComponent,
+    AnnouncementsComponent
   ],
   imports: [
     BrowserModule,
