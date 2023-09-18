@@ -1,12 +1,12 @@
 <h4>Announcements</h4>
 
-<div class="row announcement">
+<div class="row announcement" *ngFor="let announcement of announcements">
     <div class="user-details col-sm-4">
         <img class="profile-photo img-fluid rounded-circle" src="https://cdn-icons-png.flaticon.com/512/6915/6915987.png" alt="Profile Photo">
-        <div class="name">John Doe</div>
+        <div class="name">{{announcement.user.firstName}} {{announcement.user.lastName}}</div>
     </div>
     <div class="separator col-sm-1"></div>
     <div class="announcement-text col-sm-8">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget justo eu massa placerat suscipit.
+        {{announcement.content}}
     </div>
 </div>
